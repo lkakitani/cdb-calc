@@ -28,6 +28,7 @@ export function Form() {
         Data atual:
           <input type="date" id="endDate" value={endDate} onChange={e => setEndDate(e.target.value)} />
       </label>
+      <br />
       <input type="submit" value="Submit" />
     </form>
   );
