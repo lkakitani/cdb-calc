@@ -22,8 +22,11 @@
   "dependencies": {
     "isomorphic-unfetch": "^3.0.0",
     "next": "^9.2.1",
+    "pg": "^7.18.1",
+    "pg-hstore": "^2.3.3",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-google-charts": "^3.0.15"
+    "react-google-charts": "^3.0.15",
+    "sequelize": "^5.21.3"
   }
 }
