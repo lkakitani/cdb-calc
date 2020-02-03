@@ -6,8 +6,14 @@ export function Form() {
   const [cdbRate, setCdbRate] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-
+  const [result, setResult] = useState('');
   const [chartData, setChartData] = useState([]);
+
+  const parseResponse = (data) => {
+    let result = [['Data', 'Preço CDB']];
+    data.forEach(d => result.push([d.date, d.unitPrice]));
+    return result;
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,7 +27,8 @@ export function Form() {
 
     const res = await fetch(`/api/cdb?investmentDate=${startDate}&currentDate=${endDate}&cdbRate=${cdbRate}`);
     const data = await res.json();
-    setChartData(data);
+    setResult(data[data.length - 1].unitPrice);
+    setChartData(parseResponse(data));
   }
 
   return (
@@ -44,8 +51,9 @@ export function Form() {
         <br />
         <input type="submit" value="Submit" />
       </form>
-      <CDBChart title='Evolução CDB' />
-      {JSON.stringify(chartData)}
+      <br />
+      Result: {result}
+      {chartData.length > 0 && <CDBChart title='Evolução CDB' chartData={chartData} />}
     </div>
   );
 }
