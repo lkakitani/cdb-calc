@@ -12,7 +12,7 @@ const getUnitPrice = (tcdiAcumulado) => {
 };
 
 export default async (req, res) => {
-  const { investmentDate, cdbRate, currentDate } = req.body;
+  const { investmentDate, cdbRate, currentDate } = req.query;
 
   if (investmentDate === undefined ||
     cdbRate === undefined ||

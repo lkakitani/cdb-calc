@@ -3,24 +3,25 @@ import { CDBChart } from '../components/Charts';
 import fetch from 'isomorphic-unfetch';
 
 export function Form() {
-  const [taxaCDB, setTaxaCDB] = useState('');
+  const [cdbRate, setCdbRate] = useState('');
   const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState(new Date().toISOString().slice(0, 10));
+  const [endDate, setEndDate] = useState('');
 
   const [chartData, setChartData] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('taxaCDB :: startDate :: endDate');
-    console.log(taxaCDB);
-    console.log(startDate);
-    console.log(endDate);
 
-    const res = await fetch('/api/mock');
+    if (isNaN(Date.parse(startDate)) ||
+      isNaN(Date.parse(endDate)) ||
+      isNaN(parseFloat(cdbRate))) {
+      alert('Please fill the fields correctly');
+      return;
+    }
+
+    const res = await fetch(`/api/cdb?investmentDate=${startDate}&currentDate=${endDate}&cdbRate=${cdbRate}`);
     const data = await res.json();
     setChartData(data);
-    console.log(data);
-
   }
 
   return (
@@ -33,7 +34,7 @@ export function Form() {
         <br />
         <label>
           Taxa do CDB:
-        <input type="text" value={taxaCDB} onChange={e => setTaxaCDB(e.target.value)} />
+        <input type="text" value={cdbRate} onChange={e => setCdbRate(e.target.value)} />
         </label>
         <br />
         <label>
