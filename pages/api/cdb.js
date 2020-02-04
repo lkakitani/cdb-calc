@@ -34,7 +34,6 @@ export default async (req, res) => {
   let cdiInterval = await CdiValue.getCdiInterval(investmentDate, currentDate);
   cdiInterval.forEach(a => {
     tcdiAcumulado *= (1 + a.tcdi * cdbRate / 100);
-    console.log(tcdiAcumulado);
     result.push({
       "date": a.dt_date,
       "unitPrice": getUnitPrice(tcdiAcumulado)
