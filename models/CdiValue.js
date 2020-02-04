@@ -1,8 +1,14 @@
 import { Sequelize, Op } from 'sequelize';
-const sequelize = new Sequelize('postgres', 'postgres', 'docker', {
-  host: 'localhost',
-  dialect: 'postgres'
-});
+require('dotenv').config();
+
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: 'postgres'
+  });
 
 const CdiValue = sequelize.define('cdi_price', {
   s_security_name: Sequelize.STRING,
