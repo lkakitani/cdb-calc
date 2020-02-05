@@ -4,7 +4,7 @@
   "description": "CDB calculator",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watch",
     "dev": "next",
     "build": "next build",
     "start": "next start"
@@ -29,5 +29,11 @@
     "react-dom": "^16.12.0",
     "react-google-charts": "^3.0.15",
     "sequelize": "^5.21.3"
+  },
+  "devDependencies": {
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "1.15.1",
+    "jest": "24.9.0",
+    "react-test-renderer": "16.12.0"
   }
 }
