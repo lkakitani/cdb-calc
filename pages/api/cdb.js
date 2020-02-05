@@ -14,16 +14,12 @@ const getUnitPrice = (tcdiAcumulado) => {
 export default async (req, res) => {
   const { investmentDate, cdbRate, currentDate } = req.query;
 
-  if (investmentDate === undefined ||
-    cdbRate === undefined ||
-    currentDate == undefined) {
+  if (hasMissingParameters(investmentDate, cdbRate, currentDate)) {
     res.status(400).json({
       "message": "One or more parameters missing"
     });
     return;
-  } else if (isNaN(Date.parse(investmentDate)) ||
-    isNaN(Date.parse(currentDate)) ||
-    isNaN(cdbRate)) {
+  } else if (hasIncorrectParameters(investmentDate, cdbRate, currentDate)) {
     res.status(400).json({
       "message": "One or more parameters are incorrect. Date format: yyyy-MM-dd :: cdbRate: number"
     });
@@ -43,4 +39,16 @@ export default async (req, res) => {
   });
 
   res.status(200).json(result);
+}
+
+const hasMissingParameters = (investmentDate, cdbRate, currentDate) => {
+  return investmentDate === undefined ||
+    cdbRate === undefined ||
+    currentDate == undefined;
+}
+
+const hasIncorrectParameters = (investmentDate, cdbRate, currentDate) => {
+  return isNaN(Date.parse(investmentDate)) ||
+    isNaN(Date.parse(currentDate)) ||
+    isNaN(cdbRate);
 }

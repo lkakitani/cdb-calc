@@ -50,5 +50,4 @@ An example of valid request: `<host>:<port>/api/cdb?investmentDate=2018-01-05&cu
 
 ### Todo
 
-* refactor api/cdb
 * use a CSS framework to make things prettier
