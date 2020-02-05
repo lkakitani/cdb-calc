@@ -1,10 +1,10 @@
 import Layout from '../components/Layout';
-import { Form } from '../components/Form';
+import { Main } from '../components/Main';
 
 export const Page = () => (
   <div>
     <h1>Calculadora CDB</h1>
-    <Form />
+    <Main />
   </div>
 );
 

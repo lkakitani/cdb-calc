@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CDBChart } from '../components/Charts';
 import fetch from 'isomorphic-unfetch';
 
-export function Form() {
+export function Main() {
   const [cdbRate, setCdbRate] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
