@@ -4,7 +4,8 @@
   "description": "CDB calculator",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose",
+    "test:watch": "jest --watch",
     "dev": "next",
     "build": "next build",
     "start": "next start"
@@ -20,8 +21,21 @@
   },
   "homepage": "https://github.com/lkakitani/cdb-calc#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "isomorphic-unfetch": "^3.0.0",
     "next": "^9.2.1",
+    "pg": "^7.18.1",
+    "pg-hstore": "^2.3.3",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "react-google-charts": "^3.0.15",
+    "sequelize": "^5.21.3"
+  },
+  "devDependencies": {
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "1.15.1",
+    "jest": "24.9.0",
+    "react-test-renderer": "16.12.0",
+    "test-listen": "^1.1.0"
   }
 }

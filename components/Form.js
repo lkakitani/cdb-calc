@@ -1,35 +1,59 @@
 import { useState } from 'react';
+import { CDBChart } from '../components/Charts';
+import fetch from 'isomorphic-unfetch';
 
 export function Form() {
-  const [taxaCDB, setTaxaCDB] = useState('');
+  const [cdbRate, setCdbRate] = useState('');
   const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState(new Date().toISOString().slice(0, 10));
+  const [endDate, setEndDate] = useState('');
+  const [result, setResult] = useState('');
+  const [chartData, setChartData] = useState([]);
 
-  const handleSubmit = (event) => {
-    console.log('startDate :: endDate');
-    console.log(startDate);
-    console.log(endDate);
+  const parseResponse = (data) => {
+    let result = [['Data', 'Preço CDB']];
+    data.forEach(d => result.push([d.date, d.unitPrice]));
+    return result;
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (isNaN(Date.parse(startDate)) ||
+      isNaN(Date.parse(endDate)) ||
+      isNaN(parseFloat(cdbRate))) {
+      alert('Please fill the fields correctly');
+      return;
+    }
+
+    const res = await fetch(`/api/cdb?investmentDate=${startDate}&currentDate=${endDate}&cdbRate=${cdbRate}`);
+    const data = await res.json();
+    setResult(data[data.length - 1].unitPrice);
+    setChartData(parseResponse(data));
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Data inicial do investimento:
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Data inicial do investimento:
           <input type="date" id="startDate" value={startDate} onChange={e => setStartDate(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Taxa do CDB:
-        <input type="text" value={taxaCDB} onChange={e => setTaxaCDB(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Data atual:
+        </label>
+        <br />
+        <label>
+          Taxa do CDB:
+        <input type="text" value={cdbRate} onChange={e => setCdbRate(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Data atual:
           <input type="date" id="endDate" value={endDate} onChange={e => setEndDate(e.target.value)} />
-      </label>
+        </label>
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
       <br />
-      <input type="submit" value="Submit" />
-    </form>
+      <p id="result">Result: {result}</p>
+      {chartData.length > 0 && <CDBChart title='Evolução CDB' chartData={chartData} />}
+    </div>
   );
 }
