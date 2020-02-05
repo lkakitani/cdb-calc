@@ -4,7 +4,8 @@
   "description": "CDB calculator",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch",
+    "test": "jest --verbose",
+    "test:watch": "jest --watch",
     "dev": "next",
     "build": "next build",
     "start": "next start"
@@ -34,6 +35,7 @@
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.15.1",
     "jest": "24.9.0",
-    "react-test-renderer": "16.12.0"
+    "react-test-renderer": "16.12.0",
+    "test-listen": "^1.1.0"
   }
 }
