@@ -20,12 +20,14 @@ export default async (req, res) => {
     res.status(400).json({
       "message": "One or more parameters missing"
     });
+    return;
   } else if (isNaN(Date.parse(investmentDate)) ||
     isNaN(Date.parse(currentDate)) ||
     isNaN(cdbRate)) {
     res.status(400).json({
       "message": "One or more parameters are incorrect. Date format: yyyy-MM-dd :: cdbRate: number"
     });
+    return;
   }
 
   const result = [];

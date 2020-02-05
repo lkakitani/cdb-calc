@@ -52,7 +52,7 @@ export function Form() {
         <input type="submit" value="Submit" />
       </form>
       <br />
-      Result: {result}
+      <p id="result">Result: {result}</p>
       {chartData.length > 0 && <CDBChart title='Evolução CDB' chartData={chartData} />}
     </div>
   );
