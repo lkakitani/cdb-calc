@@ -1,7 +1,7 @@
 import Layout from '../components/Layout';
 import { Form } from '../components/Form';
 
-const Page = () => (
+export const Page = () => (
   <div>
     <h1>Calculadora CDB</h1>
     <Form />
